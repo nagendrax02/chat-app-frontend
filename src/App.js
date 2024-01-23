@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io(''); // Replace with your server URL
+const socket = io('http://localhost:5000/'); // Replace with your server URL
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
+
+  console.log('messages--->', messages)
 
   useEffect(() => {
     // Listen for incoming chat messages
@@ -20,6 +22,7 @@ function App() {
   }, [messages]);
 
   const sendMessage = () => {
+    console.log('send message--->', inputMessage)
     if (inputMessage.trim() !== '') {
       socket.emit('chat message', inputMessage);
       setInputMessage('');
